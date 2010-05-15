@@ -1,0 +1,8 @@
+parsidora-logos - A replacement for fedora-logos
+==============================================
+
+This package contains various image files which will be used by the bootloader,
+anaconda, and other related tools in Parsidora replacing fedora-logos package.
+
+parsidora-logos is licensed under GPLv2 and LGPl, for more details check
+COPYING and COPYING-kde-logo. 

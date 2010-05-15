@@ -1,20 +1,25 @@
-Name: parsidora-logos
-Summary: Parsidora Icons and pictures
-Version: 12.2
-Release: 1%{?dist}
-Group: System Environment/Base
-Source0: parsidora-logos-%{version}.tar.bz2
-License: GPLv2 and LGPL
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildArch: noarch
-Obsoletes: redhat-logos
-Provides: redhat-logos = %{version}-%{release}
-Provides: system-logos = %{version}-%{release}
-Conflicts: generic-logos
-Conflicts: fedora-logos
-Conflicts: kdebase <= 3.1.5
-Conflicts: anaconda-images <= 10
-Conflicts: redhat-artwork <= 5.0.5
+Name:       parsidora-logos
+Version:    13.0
+Release:    1%{?dist}
+Summary:    Parsidora Icons and pictures
+
+Group:      System Environment/Base
+URL:        http://parsidora.ir/parsidora-logos/ 
+Source0:    http://parsidora.ir/released/%{name}/%{name}-%{version}.tar.bz2
+#The KDE Logo is under a LGPL license (no version statement)
+License:    GPLv2 and LGPLv2+
+BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildArch:  noarch
+
+Obsoletes:  redhat-logos
+Provides:   redhat-logos = %{version}-%{release}
+Provides:   system-logos = %{version}-%{release}
+
+Conflicts:  fedora-logos
+Conflicts:  kdebase <= 3.1.5
+Conflicts:  anaconda-images <= 10
+Conflicts:  redhat-artwork <= 5.0.5
+Conflicts:  generic-logos
 # For _kde4_appsdir macro:
 BuildRequires: kde-filesystem
 
@@ -27,34 +32,35 @@ anaconda, and other related tools in Parsidora replacing fedora-logos package.
 %setup -q
 
 %build
+#nothing to build
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 # should be ifarch i386
-mkdir -p $RPM_BUILD_ROOT/boot/grub
-install -p -m 644 bootloader/splash.xpm.gz $RPM_BUILD_ROOT/boot/grub/splash.xpm.gz
+mkdir -p %{buildroot}/boot/grub
+install -p -m 644 bootloader/splash.xpm.gz %{buildroot}/boot/grub/splash.xpm.gz
 # end i386 bits
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/firstboot/themes/parsidora
+mkdir -p %{buildroot}%{_datadir}/firstboot/themes/parsidora
 for i in firstboot/* ; do
-  install -p -m 644 $i $RPM_BUILD_ROOT%{_datadir}/firstboot/themes/parsidora
+  install -p -m 644 $i %{buildroot}%{_datadir}/firstboot/themes/parsidora
 done
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/pixmaps/splash
+mkdir -p %{buildroot}%{_datadir}/pixmaps/splash
 for i in gnome-splash/* ; do
-  install -p -m 644 $i $RPM_BUILD_ROOT%{_datadir}/pixmaps/splash
+  install -p -m 644 $i %{buildroot}%{_datadir}/pixmaps/splash
 done
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/pixmaps
+mkdir -p %{buildroot}%{_datadir}/pixmaps
 for i in pixmaps/* ; do
-  install -p -m 644 $i $RPM_BUILD_ROOT%{_datadir}/pixmaps
+  install -p -m 644 $i %{buildroot}%{_datadir}/pixmaps
 done
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/kde-settings/kde-profile/default/share/icons/Fedora-KDE/48x48/apps/
-install -p -m 644 icons/Fedora/48x48/apps/* $RPM_BUILD_ROOT%{_datadir}/kde-settings/kde-profile/default/share/icons/Fedora-KDE/48x48/apps/
-mkdir -p $RPM_BUILD_ROOT%{_kde4_appsdir}/ksplash/Themes/Leonidas/2048x1536
-install -p -m 644 ksplash/SolarComet-kde.png $RPM_BUILD_ROOT%{_kde4_appsdir}/ksplash/Themes/Leonidas/2048x1536/logo.png
+mkdir -p %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/icons/Fedora-KDE/48x48/apps/
+install -p -m 644 icons/Fedora/48x48/apps/* %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/icons/Fedora-KDE/48x48/apps/
+mkdir -p %{buildroot}%{_kde4_appsdir}/ksplash/Themes/Leonidas/2048x1536
+install -p -m 644 ksplash/SolarComet-kde.png %{buildroot}%{_kde4_appsdir}/ksplash/Themes/Leonidas/2048x1536/logo.png
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/plymouth/themes/charge/
 for i in plymouth/charge/* ; do
@@ -62,19 +68,19 @@ for i in plymouth/charge/* ; do
 done
 
 # File or directory names do not count as trademark infringement
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/icons/Fedora/48x48/apps/
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/icons/Fedora/scalable/apps/
-install -p -m 644 icons/Fedora/48x48/apps/* $RPM_BUILD_ROOT%{_datadir}/icons/Fedora/48x48/apps/
-install	-p -m 644 icons/Fedora/scalable/apps/* $RPM_BUILD_ROOT%{_datadir}/icons/Fedora/scalable/apps/
+mkdir -p %{buildroot}%{_datadir}/icons/Fedora/48x48/apps/
+mkdir -p %{buildroot}%{_datadir}/icons/Fedora/scalable/apps/
+install -p -m 644 icons/Fedora/48x48/apps/* %{buildroot}%{_datadir}/icons/Fedora/48x48/apps/
+install	-p -m 644 icons/Fedora/scalable/apps/* %{buildroot}%{_datadir}/icons/Fedora/scalable/apps/
 
-(cd anaconda; make DESTDIR=$RPM_BUILD_ROOT install)
+(cd anaconda; make DESTDIR=%{buildroot} install)
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
-%defattr(-, root, root)
-%doc COPYING COPYING-kde-logo
+%defattr(-,root,root,-)
+%doc COPYING COPYING-kde-logo README
 %{_datadir}/firstboot/themes/*
 %{_datadir}/anaconda/pixmaps/*
 %{_datadir}/icons/Fedora/*/apps/*
@@ -88,5 +94,8 @@ rm -rf $RPM_BUILD_ROOT
 # end i386 bits
 
 %changelog
+* Sat May 15 2010 Hedayat Vatankhah <hedayat@grad.com> - 13.0-1
+- Updated for Fedora 13
+
 * Tue Jan 26 2010 Hedayat Vatankhah <hedayat@grad.com> - 12.2-1
 - Initial version. Forked from generic-logos-12.2-2 package

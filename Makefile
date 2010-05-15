@@ -13,7 +13,7 @@ tag:
 archive: tag
 	@git archive --format=tar --prefix=$(NAME)-$(VERSION)/ HEAD > $(NAME)-$(VERSION).tar
 	@bzip2 -f $(NAME)-$(VERSION).tar
-	@echo "The archive is at $(NAME)-$(VERSION).tar.bz2"
+	@echo "$(NAME)-$(VERSION).tar.bz2 created" 
 
 clean:
 	rm -f *~ *bz2
