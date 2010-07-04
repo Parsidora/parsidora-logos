@@ -1,6 +1,6 @@
 Name:       parsidora-logos
 Version:    13.0
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    Parsidora Icons and pictures
 
 Group:      System Environment/Base
@@ -94,6 +94,11 @@ rm -rf %{buildroot}
 # end i386 bits
 
 %changelog
+* Sun Jul 04 2010 Hedayat Vatankhah <hedayat@grad.com> - 13.0-2
+- Do not overwrite progress_first.png
+- Added a splash-small.png for firstboot
+- Added a plymouth theme
+
 * Sat May 15 2010 Hedayat Vatankhah <hedayat@grad.com> - 13.0-1
 - Updated for Fedora 13
 

@@ -17,7 +17,7 @@ install:
 	mkdir -p $(DESTDIR)/$(ANACONDADATADIR)
 	mkdir -p $(DESTDIR)/$(ANACONDADATADIR)/pixmaps
 	install -m 644 *.png $(DESTDIR)/$(ANACONDADATADIR)/pixmaps
-	install -m 644 splash.png $(DESTDIR)/$(ANACONDADATADIR)/pixmaps/progress_first.png
+#	install -m 644 splash.png $(DESTDIR)/$(ANACONDADATADIR)/pixmaps/progress_first.png
 	install -m 644 splash.png $(DESTDIR)/$(ANACONDADATADIR)/pixmaps/progress_first-lowres.png
 
 	mkdir -p $(DESTDIR)/$(ANACONDARUNTIMEDIR)
